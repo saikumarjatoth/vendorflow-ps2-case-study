@@ -43,7 +43,11 @@ html, body, [class*="css"] { font-family:-apple-system,BlinkMacSystemFont,'Segoe
 .block-container { max-width:1240px; padding-top:1.7rem; padding-bottom:3rem; }
 h1,h2,h3 { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif!important; letter-spacing:-.025em; color:var(--ink)!important; }
 [data-testid="stMarkdownContainer"] p, [data-testid="stMarkdownContainer"] li { color:var(--ink)!important; }
-/* Preserve Streamlit's alert surfaces; improve text contrast only. */
+/* Keep the existing dark alert surface; change only its text to white. */
+div[data-testid="stAlert"] {
+    background-color:#1d2e47!important;
+    border:1px solid #1d2e47!important;
+}
 div[data-testid="stAlert"] p,
 div[data-testid="stAlert"] span,
 div[data-testid="stAlert"] [data-testid="stMarkdownContainer"],
@@ -86,7 +90,6 @@ hr { border-color:var(--line); }
 [data-testid="stExpander"] details > summary,
 [data-testid="stExpander"] [data-testid="stExpanderHeader"] {
     background:#1d2e47!important;
-    color:#ffffff!important;
 }
 [data-testid="stExpander"] details > summary *,
 [data-testid="stExpander"] [data-testid="stExpanderHeader"] *,

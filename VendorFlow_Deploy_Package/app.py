@@ -43,7 +43,21 @@ html, body, [class*="css"] { font-family:-apple-system,BlinkMacSystemFont,'Segoe
 .block-container { max-width:1240px; padding-top:1.7rem; padding-bottom:3rem; }
 h1,h2,h3 { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif!important; letter-spacing:-.025em; color:var(--ink)!important; }
 [data-testid="stMarkdownContainer"] p, [data-testid="stMarkdownContainer"] li { color:var(--ink)!important; }
-[data-testid="stAlert"] p, [data-testid="stAlert"] span { color:#173b66!important; }
+/* High-contrast alerts: white text on a consistent dark background. */
+div[data-testid="stAlert"] {
+    background-color:#1d2e47!important;
+    border:1px solid #1d2e47!important;
+}
+div[data-testid="stAlert"] p,
+div[data-testid="stAlert"] span,
+div[data-testid="stAlert"] [data-testid="stMarkdownContainer"],
+div[data-testid="stAlert"] [data-testid="stMarkdownContainer"] * {
+    color:#ffffff!important;
+}
+div[data-testid="stAlert"] svg {
+    color:#ffffff!important;
+    fill:#ffffff!important;
+}
 h1 { font-size:2rem!important; font-weight:800!important; }
 h2 { font-size:1.35rem!important; font-weight:700!important; }
 h3 { font-size:1.05rem!important; font-weight:700!important; }
@@ -76,6 +90,23 @@ button[data-testid="stBaseButton-primary"] * { color:inherit!important; }
 .stProgress > div > div > div { background-color:#285cb2; }
 hr { border-color:var(--line); }
 [data-testid="stExpander"] { background:#fff; border:1px solid var(--line); border-radius:10px; }
+[data-testid="stExpander"] details > summary {
+    background:#1d2e47!important;
+    color:#ffffff!important;
+}
+[data-testid="stExpander"] details > summary * {
+    color:#ffffff!important;
+    fill:#ffffff!important;
+}
+[data-testid="stExpander"] details > div {
+    background:#ffffff!important;
+}
+[data-testid="stExpander"] [data-testid="stMarkdownContainer"] p,
+[data-testid="stExpander"] [data-testid="stMarkdownContainer"] li,
+[data-testid="stExpander"] [data-testid="stText"] *,
+[data-testid="stExpander"] pre {
+    color:var(--ink)!important;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -100,6 +131,9 @@ def _apply_pending_state() -> None:
 
 
 _apply_pending_state()
+# Apply navigation changes only before the radio widget is created on this rerun.
+if st.session_state.pop("pending_reset_ui", False):
+    st.session_state["nav"] = "Dashboard"
 st.session_state.setdefault("loaded_sample", None)
 st.session_state.setdefault("selected_run_id", None)
 st.session_state.setdefault("selected_sample_id", "success")
@@ -172,6 +206,8 @@ with st.sidebar:
     st.caption("Synthetic sample records · no external verification")
     if st.button("Reset demo dataset", use_container_width=True, help="Clears all run history and uploaded files, then restores the seeded sample vendor."):
         st.session_state.show_reset_confirm = True
+    if st.session_state.pop("reset_notice", False):
+        st.success("Demo data restored. Previous submissions and page results have been cleared.")
     if st.session_state.get("show_reset_confirm"):
         st.warning("This clears the local run history and uploaded files. The seeded demo vendor will be restored.")
         confirm_col, cancel_col = st.columns(2)
@@ -179,7 +215,28 @@ with st.sidebar:
             reset_demo()
             st.session_state.show_reset_confirm = False
             st.session_state.selected_run_id = None
-            st.success("Demo data restored.")
+
+            # Clear page-level results and stale widget/form state as well as the database.
+            for key in (
+                "last_run_for_page",
+                "history_run_selector",
+                "loaded_sample",
+                "pending_form_load",
+                "pending_sample_id",
+                "pending_clear_uploads",
+                "pending_clear_form",
+                "json_input",
+            ):
+                st.session_state.pop(key, None)
+            for field in FIELDS:
+                st.session_state.pop(f"field_{field}", None)
+            for category in DOCUMENT_LABELS:
+                st.session_state.pop(f"upload_{category}", None)
+
+            # The nav radio has already been instantiated in this run, so defer its
+            # reset until the next run, before that widget is created.
+            st.session_state["pending_reset_ui"] = True
+            st.session_state["reset_notice"] = True
             st.rerun()
         if cancel_col.button("Cancel", key="cancel_reset"):
             st.session_state.show_reset_confirm = False

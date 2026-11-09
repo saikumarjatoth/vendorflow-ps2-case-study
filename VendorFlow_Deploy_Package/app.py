@@ -103,6 +103,7 @@ hr { border-color:var(--line); }
 }
 [data-testid="stExpander"] [data-testid="stMarkdownContainer"] p,
 [data-testid="stExpander"] [data-testid="stMarkdownContainer"] li,
+[data-testid="stExpander"] [data-testid="stText"],
 [data-testid="stExpander"] [data-testid="stText"] *,
 [data-testid="stExpander"] pre {
     color:var(--ink)!important;

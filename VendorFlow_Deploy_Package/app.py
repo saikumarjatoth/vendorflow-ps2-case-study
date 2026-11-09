@@ -89,14 +89,21 @@ button[data-testid="stBaseButton-primary"] { color:#fff!important; background:#2
 button[data-testid="stBaseButton-primary"] * { color:inherit!important; }
 .stProgress > div > div > div { background-color:#285cb2; }
 hr { border-color:var(--line); }
-[data-testid="stExpander"] { background:#fff; border:1px solid var(--line); border-radius:10px; }
-[data-testid="stExpander"] details > summary {
-    background:#1d2e47!important;
-    color:#ffffff!important;
+/* Expander headers use a light surface so their labels never disappear. */
+[data-testid="stExpander"] {
+    background:#ffffff!important;
+    border:1px solid var(--line)!important;
+    border-radius:10px!important;
 }
-[data-testid="stExpander"] details > summary * {
-    color:#ffffff!important;
-    fill:#ffffff!important;
+[data-testid="stExpander"] details > summary,
+[data-testid="stExpander"] [data-testid="stExpanderHeader"] {
+    background:#ffffff!important;
+    color:#17253a!important;
+}
+[data-testid="stExpander"] details > summary *,
+[data-testid="stExpander"] [data-testid="stExpanderHeader"] * {
+    color:#17253a!important;
+    fill:#17253a!important;
 }
 [data-testid="stExpander"] details > div {
     background:#ffffff!important;
@@ -107,6 +114,71 @@ hr { border-color:var(--line); }
 [data-testid="stExpander"] [data-testid="stText"] *,
 [data-testid="stExpander"] pre {
     color:var(--ink)!important;
+}
+
+/* Keep text inputs, text areas, and select boxes consistent with the light UI. */
+div[data-baseweb="input"] > div,
+div[data-baseweb="textarea"] > div,
+div[data-baseweb="select"] > div {
+    background-color:#ffffff!important;
+    border-color:#cbd5e1!important;
+    color:#17253a!important;
+}
+div[data-baseweb="input"] input,
+div[data-baseweb="textarea"] textarea,
+div[data-baseweb="select"] input,
+div[data-baseweb="select"] [role="combobox"] {
+    background-color:transparent!important;
+    color:#17253a!important;
+    -webkit-text-fill-color:#17253a!important;
+    caret-color:#285cb2!important;
+}
+div[data-baseweb="input"] input::placeholder,
+div[data-baseweb="textarea"] textarea::placeholder {
+    color:#64748b!important;
+    -webkit-text-fill-color:#64748b!important;
+    opacity:1!important;
+}
+div[data-baseweb="input"] input:disabled,
+div[data-baseweb="textarea"] textarea:disabled {
+    background-color:#f1f5f9!important;
+    color:#64748b!important;
+    -webkit-text-fill-color:#64748b!important;
+}
+div[data-baseweb="select"] svg {
+    color:#475569!important;
+    fill:#475569!important;
+}
+div[data-baseweb="popover"],
+div[role="listbox"],
+ul[role="listbox"] {
+    background:#ffffff!important;
+    color:#17253a!important;
+}
+div[role="option"],
+li[role="option"] {
+    background:#ffffff!important;
+    color:#17253a!important;
+}
+div[role="option"]:hover,
+li[role="option"]:hover,
+div[role="option"][aria-selected="true"],
+li[role="option"][aria-selected="true"] {
+    background:#eef4ff!important;
+    color:#17253a!important;
+}
+
+/* File upload and widget labels remain readable on the light page. */
+[data-testid="stWidgetLabel"] p,
+[data-testid="stWidgetLabel"] span {
+    color:#17253a!important;
+}
+[data-testid="stFileUploaderDropzone"] {
+    background:#ffffff!important;
+    border-color:#cbd5e1!important;
+}
+[data-testid="stFileUploaderDropzone"] * {
+    color:#17253a!important;
 }
 </style>
 """, unsafe_allow_html=True)

@@ -43,20 +43,13 @@ html, body, [class*="css"] { font-family:-apple-system,BlinkMacSystemFont,'Segoe
 .block-container { max-width:1240px; padding-top:1.7rem; padding-bottom:3rem; }
 h1,h2,h3 { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif!important; letter-spacing:-.025em; color:var(--ink)!important; }
 [data-testid="stMarkdownContainer"] p, [data-testid="stMarkdownContainer"] li { color:var(--ink)!important; }
-/* High-contrast alerts: white text on a consistent dark background. */
-div[data-testid="stAlert"] {
-    background-color:#1d2e47!important;
-    border:1px solid #1d2e47!important;
-}
+/* Preserve Streamlit's alert surfaces; improve text contrast only. */
 div[data-testid="stAlert"] p,
 div[data-testid="stAlert"] span,
 div[data-testid="stAlert"] [data-testid="stMarkdownContainer"],
 div[data-testid="stAlert"] [data-testid="stMarkdownContainer"] * {
     color:#ffffff!important;
-}
-div[data-testid="stAlert"] svg {
-    color:#ffffff!important;
-    fill:#ffffff!important;
+    -webkit-text-fill-color:#ffffff!important;
 }
 h1 { font-size:2rem!important; font-weight:800!important; }
 h2 { font-size:1.35rem!important; font-weight:700!important; }
@@ -89,96 +82,20 @@ button[data-testid="stBaseButton-primary"] { color:#fff!important; background:#2
 button[data-testid="stBaseButton-primary"] * { color:inherit!important; }
 .stProgress > div > div > div { background-color:#285cb2; }
 hr { border-color:var(--line); }
-/* Expander headers use a light surface so their labels never disappear. */
-[data-testid="stExpander"] {
-    background:#ffffff!important;
-    border:1px solid var(--line)!important;
-    border-radius:10px!important;
-}
+/* Keep the existing dark expander bars; change only their text to white. */
 [data-testid="stExpander"] details > summary,
 [data-testid="stExpander"] [data-testid="stExpanderHeader"] {
-    background:#ffffff!important;
-    color:#17253a!important;
+    background:#1d2e47!important;
+    color:#ffffff!important;
 }
 [data-testid="stExpander"] details > summary *,
-[data-testid="stExpander"] [data-testid="stExpanderHeader"] * {
-    color:#17253a!important;
-    fill:#17253a!important;
-}
-[data-testid="stExpander"] details > div {
-    background:#ffffff!important;
-}
-[data-testid="stExpander"] [data-testid="stMarkdownContainer"] p,
-[data-testid="stExpander"] [data-testid="stMarkdownContainer"] li,
-[data-testid="stExpander"] [data-testid="stText"],
-[data-testid="stExpander"] [data-testid="stText"] *,
-[data-testid="stExpander"] pre {
-    color:var(--ink)!important;
-}
-
-/* Keep text inputs, text areas, and select boxes consistent with the light UI. */
-div[data-baseweb="input"] > div,
-div[data-baseweb="textarea"] > div,
-div[data-baseweb="select"] > div {
-    background-color:#ffffff!important;
-    border-color:#cbd5e1!important;
-    color:#17253a!important;
-}
-div[data-baseweb="input"] input,
-div[data-baseweb="textarea"] textarea,
-div[data-baseweb="select"] input,
-div[data-baseweb="select"] [role="combobox"] {
-    background-color:transparent!important;
-    color:#17253a!important;
-    -webkit-text-fill-color:#17253a!important;
-    caret-color:#285cb2!important;
-}
-div[data-baseweb="input"] input::placeholder,
-div[data-baseweb="textarea"] textarea::placeholder {
-    color:#64748b!important;
-    -webkit-text-fill-color:#64748b!important;
-    opacity:1!important;
-}
-div[data-baseweb="input"] input:disabled,
-div[data-baseweb="textarea"] textarea:disabled {
-    background-color:#f1f5f9!important;
-    color:#64748b!important;
-    -webkit-text-fill-color:#64748b!important;
-}
-div[data-baseweb="select"] svg {
-    color:#475569!important;
-    fill:#475569!important;
-}
-div[data-baseweb="popover"],
-div[role="listbox"],
-ul[role="listbox"] {
-    background:#ffffff!important;
-    color:#17253a!important;
-}
-div[role="option"],
-li[role="option"] {
-    background:#ffffff!important;
-    color:#17253a!important;
-}
-div[role="option"]:hover,
-li[role="option"]:hover,
-div[role="option"][aria-selected="true"],
-li[role="option"][aria-selected="true"] {
-    background:#eef4ff!important;
-    color:#17253a!important;
-}
-
-/* File upload and widget labels remain readable on the light page. */
-[data-testid="stWidgetLabel"] p,
-[data-testid="stWidgetLabel"] span {
-    color:#17253a!important;
-}
-[data-testid="stFileUploaderDropzone"] {
-    background:#ffffff!important;
-    border-color:#cbd5e1!important;
-}
-[data-testid="stFileUploaderDropzone"] * {
-    color:#17253a!important;
+[data-testid="stExpander"] [data-testid="stExpanderHeader"] *,
+[data-testid="stExpander"] summary p,
+[data-testid="stExpander"] summary span,
+[data-testid="stExpander"] summary div {
+    color:#ffffff!important;
+    -webkit-text-fill-color:#ffffff!important;
+    fill:#ffffff!important;
 }
 </style>
 """, unsafe_allow_html=True)

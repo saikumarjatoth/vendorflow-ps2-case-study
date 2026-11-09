@@ -395,7 +395,5 @@ else:
 """)
     st.markdown("### Public deployment note")
     st.markdown("`render.yaml` is included for an optional Render deployment. The starter uses SQLite on the service filesystem; free hosted filesystems can reset, so run history there is demo-only unless a persistent disk or managed database is configured.")
-    st.markdown("### Five-minute demo sequence")
-    st.markdown("Open the Dashboard, run Successful Vendor, inspect the eight stages and Approved result; then run Bank Details Mismatch for a Pending case; inspect the communication draft and Run History; finish by explaining the rules and limits below. The full narration is in `DEMO_SCRIPT.md` in the project ZIP.")
     st.caption("All supplied vendor values and document placeholders are synthetic and for demonstration only.")
 

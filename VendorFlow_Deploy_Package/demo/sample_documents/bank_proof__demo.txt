@@ -1,0 +1,4 @@
+DEMONSTRATION ONLY — NOT AN OFFICIAL DOCUMENT
+Synthetic placeholder used to show document presence in the VendorFlow demo.
+It contains no real bank, account, person, business, or financial information.
+Upload type: Bank proof.

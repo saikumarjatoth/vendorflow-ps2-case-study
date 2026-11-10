@@ -55,6 +55,20 @@ div[data-testid="stAlert"] [data-testid="stMarkdownContainer"] * {
     color:#ffffff!important;
     -webkit-text-fill-color:#ffffff!important;
 }
+/* Lighten only Streamlit's fixed top toolbar; preserve its position and controls. */
+header[data-testid="stHeader"],
+div[data-testid="stToolbar"] {
+    background-color:#ffffff!important;
+}
+header[data-testid="stHeader"] *,
+div[data-testid="stToolbar"] * {
+    color:#17253a!important;
+    fill:#17253a!important;
+}
+header[data-testid="stHeader"] button,
+div[data-testid="stToolbar"] button {
+    color:#17253a!important;
+}
 h1 { font-size:2rem!important; font-weight:800!important; }
 h2 { font-size:1.35rem!important; font-weight:700!important; }
 h3 { font-size:1.05rem!important; font-weight:700!important; }
@@ -99,6 +113,14 @@ hr { border-color:var(--line); }
     color:#ffffff!important;
     -webkit-text-fill-color:#ffffff!important;
     fill:#ffffff!important;
+}
+/* The email body is rendered with st.text inside this expander.
+   Give that text a readable ink color without changing the white panel. */
+[data-testid="stExpander"] [data-testid="stText"],
+[data-testid="stExpander"] [data-testid="stText"] * {
+    color:#17253a!important;
+    -webkit-text-fill-color:#17253a!important;
+    opacity:1!important;
 }
 </style>
 """, unsafe_allow_html=True)

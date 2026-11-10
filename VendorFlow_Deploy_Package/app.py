@@ -55,10 +55,12 @@ div[data-testid="stAlert"] [data-testid="stMarkdownContainer"] * {
     color:#ffffff!important;
     -webkit-text-fill-color:#ffffff!important;
 }
-/* Lighten only Streamlit's fixed top toolbar; preserve its position and controls. */
+/* Translucent top toolbar: lets scrolled page content show through. */
 header[data-testid="stHeader"],
 div[data-testid="stToolbar"] {
-    background-color:#ffffff!important;
+    background-color:rgba(246,248,251,0.62)!important;
+    -webkit-backdrop-filter:blur(10px);
+    backdrop-filter:blur(10px);
 }
 header[data-testid="stHeader"] *,
 div[data-testid="stToolbar"] * {
